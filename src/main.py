@@ -1,6 +1,7 @@
 import os
-from typing import List
+from typing import List, Dict
 import json
+from shutil import move
 
 from PySide2.QtWidgets import QApplication, QFileDialog
 
@@ -13,6 +14,7 @@ def main():
         raise FileNotFoundError("There are no files in this directory!")
 
     mapping = read_json(os.path.join("src", "mapping.json"))
+    sort_files(files, mapping)
 
 
 def get_files_from_path(path: str) -> List[str]:
@@ -45,8 +47,35 @@ def show_directory_dialog() -> str:
         caption="Choose a directory to sort!", # Dialog title
         dir=os.path.expanduser("~") # Dialog will start in the user's home directory.
     )
+    if not folder_path:
+        quit()
 
     return folder_path
+
+
+def sort_files(files: List[str], mapping: Dict[str, List[str]]) -> None:
+    """ Move files into folders.
+    @param files: A list of file paths.
+    @param mapping: A dictionary with Folders as key and a list of extensions as value.
+    {
+        "Images": [".png", ".jpg"]
+    }
+    This will move all '.png' and '.jpg' file into a folder called 'Images'.
+    """
+    directory = os.path.dirname(files[0])
+    os.chdir(directory)
+
+    for file in files:
+        file_name, file_ext = os.path.splitext(file)
+        for folder in mapping:
+            if file_ext not in mapping[folder]:
+                continue
+
+            if os.path.exists(folder):
+                move(file, folder)
+            else:
+                move(file, folder)
+                os.makedirs(folder)
 
 
 if __name__ == "__main__":
