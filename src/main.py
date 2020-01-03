@@ -1,5 +1,6 @@
 import os
 from typing import List
+import json
 
 from PySide2.QtWidgets import QApplication, QFileDialog
 
@@ -11,8 +12,14 @@ def main():
     if not files:
         raise FileNotFoundError("There are no files in this directory!")
 
+    mapping = read_json(os.path.join("src", "mapping.json"))
+
 
 def get_files_from_path(path: str) -> List[str]:
+    """ Get all files from a given path.
+    @param path: Directory to scan.
+    @return: Returns a list of the files absolute path.
+    """
     files = []
     for filename in os.listdir(path):
         filepath = os.path.join(path, filename)
@@ -21,6 +28,15 @@ def get_files_from_path(path: str) -> List[str]:
         files.append(filepath)
 
     return files
+
+
+def read_json(path: str) -> json:
+    """ Read a JSON file and return its contents.
+    @param path: Path to JSON file.
+    @return: Returns a JSON object.
+    """
+    with open(path, "r", encoding="UTF-8") as f:
+        return json.loads(f.read())
 
 
 def show_directory_dialog() -> str:
