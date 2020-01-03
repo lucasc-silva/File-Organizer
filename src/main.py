@@ -1,10 +1,26 @@
 import os
+from typing import List
 
 from PySide2.QtWidgets import QApplication, QFileDialog
 
 
 def main():
     folder_path = show_directory_dialog()
+
+    files = get_files_from_path(folder_path)
+    if not files:
+        raise FileNotFoundError("There are no files in this directory!")
+
+
+def get_files_from_path(path: str) -> List[str]:
+    files = []
+    for filename in os.listdir(path):
+        filepath = os.path.join(path, filename)
+        if os.path.isdir(filepath):
+            continue
+        files.append(filepath)
+
+    return files
 
 
 def show_directory_dialog() -> str:
