@@ -45,4 +45,4 @@ Then run the script.
 python3 src/main.py
 ```
 
-When you run the program, a directory dialog will appear, allowing you to choose a directory to sort. Files will also show, but won't be selectable. If you click in **cancel**, the dialog will close and the program will stop running.
+When you run the program, a directory dialog will appear, allowing you to choose a directory to sort.
