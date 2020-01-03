@@ -1,0 +1,24 @@
+{
+    "Images": [
+        ".pdf",
+        ".jpg"
+    ],
+    "Documents": [
+        ".txt",
+        ".pdf"
+    ],
+    "Books": [
+        ".epub",
+        ".mobi"
+    ],
+    "Executables": [
+        ".exe"
+    ],
+    "Videos": [
+        ".mp4",
+        ".mkv"
+    ],
+    "Music": [
+        ".mp3"
+    ]
+}
