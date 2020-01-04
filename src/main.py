@@ -1,7 +1,7 @@
 import os
 from typing import List, Dict
 import json
-from shutil import move
+import shutil
 
 from PySide2.QtWidgets import QApplication, QFileDialog
 
@@ -72,10 +72,10 @@ def sort_files(files: List[str], mapping: Dict[str, List[str]]) -> None:
                 continue
 
             if os.path.exists(folder):
-                move(file, folder)
+                shutil.move(file, folder)
             else:
-                move(file, folder)
                 os.makedirs(folder)
+                shutil.move(file, folder)
 
 
 if __name__ == "__main__":
