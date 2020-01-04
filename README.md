@@ -97,7 +97,8 @@ cd File-Organizer/
 ```sh
 python3 src/main.py
 ```
-
-When you run the program, a directory dialog will appear, allowing you to choose a directory to sort.
+* When you run the program, a directory dialog will appear, allowing you to choose a directory to sort.
 
 ## Preview
+![Gif showing how the script works](file-organizer.gif)
+* Note: Files are only moved if their extensions are in **mapping.json**
